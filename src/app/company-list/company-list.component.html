@@ -1,0 +1,59 @@
+<!--Navbar-->
+<div class="toolbar" role="banner">
+  <span style="margin-left: 10px;">APPLICTION 1 --- [OPTION 1]</span>
+  <div class="spacer"></div>
+
+</div>
+
+
+<div style="padding:10px;">
+  <!--Search Company Textbox-->
+  <div style="margin-top: 5px">
+    <mat-form-field class="example-full-width" style="margin-right: 10px;">
+      <mat-label>Search Company</mat-label>
+      <input matInput placeholder="Ex. Pizza" [(ngModel)]="searchname" #input>
+    </mat-form-field>
+
+
+    <!--Search Exchange Select-->
+    <mat-form-field style="margin-right: 10px;">
+      <mat-label>Exchange</mat-label>
+      <select matNativeControl placeholder="Exchange" [(ngModel)]="searchtopic">
+        <option *ngFor="let exchange of exchanges" [ngValue]="exchange">{{exchange}}</option>
+      </select>
+    </mat-form-field>
+
+    <!--Search and Clear Button-->
+    <button mat-flat-button color="primary" (click)="applyFilter()" style="margin-right: 5px;">Search Company</button>
+
+    <button mat-stroked-button color="primary" (click)="clearFilter()" *ngIf="clear_filter">Clear Filter</button>
+  </div>
+
+
+  <!--Table-->
+  <table id="company">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Symbol</th>
+        <th>Currency</th>
+        <th>Exchange Short Name</th>
+        <th>Stock Exchange</th>
+        <th>Download</th>
+      </tr>
+    </thead>
+
+
+    <tr *ngFor="let company of filterdata; let i=index;">
+      <td>{{company.name}}</td>
+      <td>{{company.symbol}}</td>
+      <td>{{company.currency}}</td>
+      <td>{{company.exchangeShortName}}</td>
+      <td>{{company.stockExchange}}</td>
+      <td> <button mat-stroked-button color="warn" (click)="download(company.symbol)">Download Statement</button>
+      </td>
+
+    </tr>
+  </table>
+
+</div>

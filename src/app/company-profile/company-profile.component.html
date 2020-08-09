@@ -1,0 +1,59 @@
+<div class="toolbar" role="banner">
+  <span style="margin-left: 10px;">APPLICTION 2</span>
+  <div class="spacer"></div>
+
+</div>
+<div style="padding:10px;">
+
+  <!--Search Company Filter input and button-->
+  <div style="margin-top: 5px;margin-bottom:25px;">
+    <mat-form-field class="example-full-width" style="margin-right: 10px;">
+      <mat-label>Search Company</mat-label>
+      <input matInput placeholder="Ex. Pizza" [(ngModel)]="searchcompany" #input>
+    </mat-form-field>
+
+
+    <button mat-flat-button color="primary" (click)="applyFilter()" style="margin-right: 5px;">Search Company</button>
+
+  </div>
+
+  <div id="companydetails">
+
+    <!--Column-left-->
+    <mat-grid-list cols="2" rowHeight="2:1" style="margin-top: 10px;">
+      <mat-grid-tile>
+        <div style="display: inline-block;
+        position: absolute;
+        top: 0px;
+        left: 37px;">
+          <div style="float: left;">
+            <img mat-card-image src="{{companiesProfile.profile.image}}" alt="" style="width:50%"><br />
+
+          </div>
+          <div style="float: right;">
+            <p> {{companiesProfile.profile.companyName}}</p>
+            <p>{{companiesProfile.profile.ceo}}</p>
+          </div>
+
+        </div>
+        <div style="margin-top: 12px;">
+          <p><span style="font-size: 18px;
+            font-weight: bold;">Description: &nbsp;&nbsp;</span>{{companiesProfile.profile.description}}</p>
+        </div>
+      </mat-grid-tile>
+
+      <!--Column-right-->
+      <mat-grid-tile>
+        <div style="position: absolute;left: 90px;top: 75px;">
+          <p><span style="font-size: 15px;
+            font-weight: bold;">PRICE: &nbsp;&nbsp; </span>{{companiesProfile.profile.price}} $</p>
+          <p><span style="font-size: 15px;
+            font-weight: bold;">LAST DIVIDEND: &nbsp;&nbsp;</span>{{companiesProfile.profile.lastDiv}}</p>
+
+          <button mat-flat-button color="primary" (click)="download()" style="margin-right: 5px;">Download Data</button>
+        </div>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </div>
+</div>

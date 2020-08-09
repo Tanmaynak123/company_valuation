@@ -1,0 +1,50 @@
+#company {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+}
+
+#company td,
+#company th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#company th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: lightseagreen;
+  color: white;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.toolbar {
+  position: static;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.toolbar #twitter-logo {
+  height: 40px;
+  margin: 0 16px;
+}
+
+.toolbar #twitter-logo:hover {
+  opacity: 0.8;
+}
