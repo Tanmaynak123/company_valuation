@@ -23,6 +23,24 @@
       </select>
     </mat-form-field>
 
+    <mat-form-field style="margin-right: 10px;">
+      <mat-label>Limit</mat-label>
+      <select matNativeControl placeholder="Exchange" [(ngModel)]="limit">
+        <option>10</option>
+        <option>20</option>
+        <option>30</option>
+        <option>40</option>
+        <option>50</option>
+        <option>60</option>
+        <option>70</option>
+        <option>80</option>
+        <option>80</option>
+        <option>90</option>
+        <option>100</option>
+
+      </select>
+    </mat-form-field>
+
     <!--Search and Clear Button-->
     <button mat-flat-button color="primary" (click)="applyFilter()" style="margin-right: 5px;">Search Company</button>
 
@@ -31,29 +49,34 @@
 
 
   <!--Table-->
-  <table id="company">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Symbol</th>
-        <th>Currency</th>
-        <th>Exchange Short Name</th>
-        <th>Stock Exchange</th>
-        <th>Download</th>
+
+  <div *ngIf="showTable === true">
+    <!-- <mat-spinner *ngIf="showSpinner === true"></mat-spinner> -->
+    <table id="company">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Symbol</th>
+          <th>Currency</th>
+          <th>Exchange Short Name</th>
+          <th>Stock Exchange</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+
+
+      <tr *ngFor="let company of filterdata; let i=index;">
+        <td>{{company.name}}</td>
+        <td>{{company.symbol}}</td>
+        <td>{{company.currency}}</td>
+        <td>{{company.exchangeShortName}}</td>
+        <td>{{company.stockExchange}}</td>
+        <td> <button mat-stroked-button color="warn" (click)="download(company.symbol)">Download Statement</button>
+        </td>
+
       </tr>
-    </thead>
+    </table>
+  </div>
 
-
-    <tr *ngFor="let company of filterdata; let i=index;">
-      <td>{{company.name}}</td>
-      <td>{{company.symbol}}</td>
-      <td>{{company.currency}}</td>
-      <td>{{company.exchangeShortName}}</td>
-      <td>{{company.stockExchange}}</td>
-      <td> <button mat-stroked-button color="warn" (click)="download(company.symbol)">Download Statement</button>
-      </td>
-
-    </tr>
-  </table>
 
 </div>

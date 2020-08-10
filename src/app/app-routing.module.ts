@@ -21,5 +21,5 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [CompanyListComponent, CompanyProfileComponent]
+export const routingComponents = [CompanyListComponent, CompanyProfileComponent, HomePageComponent]
 

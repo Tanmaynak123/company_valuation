@@ -12,6 +12,9 @@ import { CompaniesService } from '../companies.service';
 export class CompanyListComponent implements OnInit {
   searchname;
   searchtopic;
+  showTable: boolean = false;
+  showSpinner: boolean = false;
+  limit;
   companies: any = [];
   dataSource;
   exchanges: any = [];
@@ -25,10 +28,29 @@ export class CompanyListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.companies = this.companiesService.getCompany();
-    console.log(this.companies, "companies");
+    // this.companies = this.companiesService.getCompany();
+    // console.log(this.companies, "companies");
 
-    this.companiesService.getCompany()
+    // this.companiesService.getCompany()
+    //   .subscribe(
+    //     response => {
+    //       console.log(response);
+    //       this.companies = response;
+    //       this.filterdata = response;
+
+    //       this.getExchange();
+
+    //     }, error => {
+    //       alert("Upexpected Error in getCompanies")
+    //       console.log(error);
+
+    //     })
+    this.getExchange();
+
+  }
+
+  getCompanyData() {
+    this.companiesService.getCompanyData(this.searchname, this.searchtopic, this.limit)
       .subscribe(
         response => {
           console.log(response);
@@ -46,11 +68,20 @@ export class CompanyListComponent implements OnInit {
 
   // Exchange Select
   getExchange() {
-    if (this.companies) {
-      this.companies.forEach(element => {
-        if (this.exchanges.indexOf(element.stockExchange) === -1) this.exchanges.push(element.stockExchange);
-      });
-    }
+    this.companiesService.getExchange()
+      .subscribe(
+        (companies: any) => {
+          if (companies) {
+            companies.forEach(element => {
+              if (this.exchanges.indexOf(element.exchangeShortName) === -1) this.exchanges.push(element.exchangeShortName);
+            });
+          }
+        }, error => {
+          alert("Upexpected Error in getCompanies")
+          console.log(error);
+
+        }
+      )
   }
 
   //Download Statement
@@ -61,27 +92,30 @@ export class CompanyListComponent implements OnInit {
 
   //Search Company filter
   applyFilter() {
-    if (this.searchname && (this.searchtopic && this.searchtopic != 'select')) {
-      this.filterdata = this.companies.filter(data => {
-        return ((!data.name ? "" : data.name.toLowerCase().indexOf(this.searchname.toLowerCase()) >= 0) && (!data.stockExchange ? "" : data.stockExchange.toLowerCase().indexOf(this.searchtopic.toLowerCase()) >= 0));
-      });
-      this.clear_filter = true;
-    } else if (this.searchname) {
-      this.filterdata = this.companies.filter(data => {
-        return (!data.name ? "" : data.name.toLowerCase().indexOf(this.searchname.toLowerCase()) >= 0);
-      });
-      this.clear_filter = true;
-    } else if (this.searchtopic && this.searchtopic != 'select') {
-      this.filterdata = this.companies.filter(data => {
-        return (!data.stockExchange ? "" : data.stockExchange.toLowerCase().indexOf(this.searchtopic.toLowerCase()) >= 0);
-      });
-      this.clear_filter = true;
-    } else {
-      this.filterdata = this.companies;
-      this.clear_filter = false;
-      alert("Please select compay name or stock exchange");
-    }
-    this.ref.detectChanges();
+    // if ((this.searchname && this.searchname != 'select') && (this.searchtopic && this.searchtopic != 'select')) {
+    //   this.filterdata = this.companies.filter(data => {
+    //     return ((!data.name ? "" : data.name.toLowerCase().indexOf(this.searchname.toLowerCase()) >= 0) && (!data.stockExchange ? "" : data.stockExchange.toLowerCase().indexOf(this.searchtopic.toLowerCase()) >= 0));
+    //   });
+    //   this.clear_filter = true;
+    // } else if (this.searchname && this.searchname != 'select') {
+    //   this.filterdata = this.companies.filter(data => {
+    //     return (!data.name ? "" : data.name.toLowerCase().indexOf(this.searchname.toLowerCase()) >= 0);
+    //   });
+    //   this.clear_filter = true;
+    // } else if (this.searchtopic && this.searchtopic != 'select') {
+    //   this.filterdata = this.companies.filter(data => {
+    //     return (!data.stockExchange ? "" : data.stockExchange.toLowerCase().indexOf(this.searchtopic.toLowerCase()) >= 0);
+    //   });
+    //   this.clear_filter = true;
+    // } else {
+    //   this.filterdata = this.companies;
+    //   this.clear_filter = false;
+    //   alert("Please select compay name or stock exchange");
+    // }
+    // this.ref.detectChanges();
+    this.showTable = true;
+    this.getCompanyData();
+
   }
 
   clearFilter() {

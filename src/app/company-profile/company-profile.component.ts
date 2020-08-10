@@ -34,6 +34,23 @@ export class CompanyProfileComponent implements OnInit {
 
         })
   }
+  // getCompanyProfile() {
+  //   // this.companiesProfile = this.companiesService.getProfile(this.searchcompany);
+  //   // console.log(this.companiesProfile, "companies");
+
+  //   this.companiesService.getCompanyProfile(this.searchcompany)
+  //     .subscribe(
+  //       response => {
+  //         console.log(response);
+  //         this.companiesProfile = response;
+  //         this.filterdata = response;
+
+  //       }, error => {
+  //         alert("Upexpected Error in getCompanies")
+  //         console.log(error);
+
+  //       })
+  // }
 
   applyFilter() {
     console.log(this.searchcompany, "searchText ==>")

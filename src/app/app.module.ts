@@ -16,8 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { HomePageComponent } from './home-page/home-page.component';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 //Component
@@ -28,8 +27,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
-    HomePageComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,
@@ -43,7 +41,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     HttpClientModule,
     MatCardModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
